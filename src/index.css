@@ -7,16 +7,4 @@
 @theme {
     --font-IBM: "IBM Plex Sans", sans-serif;
     --font-Inter: "Inter", sans-serif;
-
 }
-
-@layer components{
-    .darkTheme {
-        background-color: #32384b;
-    }
-
-    .lightTheme{
-        background-color: white;
-    }
-}
-

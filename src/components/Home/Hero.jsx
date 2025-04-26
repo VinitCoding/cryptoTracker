@@ -7,16 +7,16 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 
 const Hero = () => {
-  useEffect(() => {
-              AOS.init({
-                duration: 1000, // animation duration in ms
-                once: true,     // whether animation should happen only once
-              });
-  }, []);
+   useEffect(() => {
+          AOS.init({
+            duration: 1000, // animation duration in ms
+            once: true,     // whether animation should happen only once
+          });
+      }, []);
   return (
-    <div style={{ width: '100%', height: '700px', position: 'relative' }} className='2xl:h-[800px], xl:h-[600px] lg:h-[600px] bg-white dark:bg-[#32384b] transition-colors duration-500'>
+    <div style={{ width: '100%', height: '700px', position: 'relative' }} className='2xl:h-[800px], xl:h-[600px] lg:h-[600px] bg-white dark:bg-[#192d49de]'>
         <Particles
-        particleColors={['#1479F8', '#81BCFF'] }
+          particleColors={[]}
           particleCount={800}
           particleSpread={13}
           speed={0.05}
@@ -28,13 +28,13 @@ const Hero = () => {
         />
 
       {/* <div className='absolute 2xl:top-[23%] xl:top-[20%] md:top-[25%] sm:top-[20%] top-[20%] 2xl:left-[18%] xl:left-[23%] lg:left-[20%] md:left-[15%] sm:left-[5%] left-[5%]'> */}
-      <div className='absolute w-full flex flex-col justify-center items-center top-40' data-aos="fade-up">
+      <div data-aos="fade-up" className='absolute w-full flex flex-col justify-center items-center top-40'>
           <div className='w-full'>
             <h1 className='font-IBM bg-gradient-to-b from-blue-300 to-blue-500 bg-clip-text text-transparent 2xl:text-[7rem] xl:text-8xl lg:text-7xl md:text-6xl sm:text-6xl text-6xl 2xl:leading-32 xl:leading-[8rem] md:leading-24 sm:leading-24 leading-20 font-extrabold text-center'>Track Crypto Price in <br /> Real time</h1>
           </div>
 
-          <div className='my-10'>
-            <h4 className='2xl:text-2xl xl:text-xl lg:text-xl md:text-lg sm:text-base text-base text-center tracking-widest font-medium text-gray-600 dark:text-gray-100 font-Inter'>Stand up-to-date with the latest cryptocurrencies
+          <div className='my-6'>
+            <h4 className='2xl:text-2xl xl:text-xl lg:text-xl md:text-lg sm:text-base text-base text-center tracking-widest font-light text-gray-600 font-Inter dark:text-gray-200'>Stand up-to-date with the latest cryptocurrencies
             and trends </h4>
           </div>
 

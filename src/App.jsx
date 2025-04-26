@@ -5,7 +5,8 @@ import Navbar from './components/Home/Navbar';
 import Hero from './components/Home/Hero';
 import UseCase from './components/Home/UseCase';
 import Footer from './components/Home/Footer';
-import { ThemeProvider } from './components/ThemeContext';
+import { ThemeProvider } from './components/Theme';
+
         
 
 const App = () => {
@@ -29,6 +30,8 @@ const App = () => {
     </>
     
   )
+
+  
 }
 
 export default App
