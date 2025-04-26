@@ -3,12 +3,18 @@ import logo_img from '../../images/logo.svg'
 import { useTheme } from '../Theme'
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { Tooltip } from 'primereact/tooltip';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const {darkMode, toggleTheme} = useTheme()
+  const navigate = useNavigate()
+  const { darkMode, toggleTheme } = useTheme()
+  
+  const routeToLandingPage = () => {
+    navigate('/')
+  }
   return (
     <nav className='fixed w-full p-3 border-b border-gray-300 dark:border-gray-600 flex justify-between items-center px-5 bg-white/30 dark:bg-[#374861c0] backdrop-blur-md z-10 transition-colors duration-300'>
-      <img src={logo_img} alt="logo" />
+      <img src={logo_img} alt="logo" onClick={() => routeToLandingPage()} className='cursor-pointer'/>
 
       <Tooltip target=".custom-target-icon" className='text-sm p-0 m-0' pt={{
         text: { style: { fontSize: '12px', maxWidth: '150px', padding: '4px 8px' } }

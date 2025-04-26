@@ -25,7 +25,7 @@ const UseCase = () => {
   return (
       <div className='w-full h-1/4 bg-gray-50 dark:bg-[#435c82] p-4 py-12 pb-16 flex flex-col gap-8'>
         <div data-aos="fade-up">
-            <h4 className='bg-gradient-to-b from-blue-300 to-blue-500 bg-clip-text text-transparent text-center text-2xl font-IBM font-semibold'>Why to use CryptoPedia ?</h4>
+            <h4 className='bg-gradient-to-b from-blue-300 to-blue-500 bg-clip-text text-transparent text-center text-2xl font-IBM font-semibold'>Why to use CryptoTracker ?</h4>
         </div>
         <div className='grid 2xl:grid-cols-4 xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-4' data-aos="fade-up">
         <SpotlightCard spotlightColor="rgba(60, 140, 255, 0.3)" className='bg-white dark:bg-[#374861] border-0 shadow-md rounded-md '>
