@@ -10,8 +10,8 @@ const Footer = () => {
             });
           }, []);
   return (
-    <div className='bg-blue-400 py-5' data-aos="fade-up">
-        <h4 className='text-white font-IBM font-semibold text-lg text-center'>Copyright © By Vinit Gite. All rights reserved.</h4>
+    <div className='bg-blue-400 py-5' >
+      <h4 data-aos="fade-up" className='text-white font-IBM font-semibold text-lg text-center'>Copyright © By Vinit Gite. All rights reserved.</h4>
     </div>
   )
 }
