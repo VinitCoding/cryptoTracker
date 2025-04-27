@@ -23,19 +23,10 @@ const CoinDetailsPage = () => {
       name: selectedCurrency,
       symbol: selectedCurrency === 'inr' ? '₹' : selectedCurrency === 'eur' ? '€' : '$',
     };
-    // setTimeout(() => {
-    //   setTimeout(() => {
-    //     setCurrency(currencyData);
-    //     sessionStorage.setItem('currency', JSON.stringify(currencyData)); // Save to sessionStorage
-    //   }, 100)
-
-    //   setLoading(false)
-    // }, 2000)
     setCurrency(currencyData);
     sessionStorage.setItem('currency', JSON.stringify(currencyData)); // Save to sessionStorage
   }
   const fetchCoinData = async () => {
-    // setLoading(true)
     try {
       const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}`, {
         headers: {
@@ -44,31 +35,16 @@ const CoinDetailsPage = () => {
         }
       })
       if (response) {
-        // console.log('Data fetch successfully', response.data);
         setCoinData(response.data)
-        // setTimeout(() => {
-        //   setLoading(false);
-        // }, 1500)
       }
 
     } catch (error) {
       toast.error('Error while fetching the data by ID')
       console.error(error);
-      // setLoading(false);
 
     }
   }
-  // const response = await axios.get('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart', {
-  //   params: {
-  //     vs_currency: currency,
-  //     days: days,
-  //     interval: 'daily'
-  //   },
-  //   headers: {
-  //     accept: 'application/json',
-  //     'x-cg-demo-api-key': API_KEY
-  //   }
-  // })
+
   const fetchHistoricalData = async () => {
     setLoading(true)
     try {
@@ -90,7 +66,6 @@ const CoinDetailsPage = () => {
 
       if (response && response.data) {
         setHistoricalData(response.data);
-        console.log('Historical data fetched successfully:', response.data);
         setTimeout(() => {
           setLoading(false)
         }, 1500)
