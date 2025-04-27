@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.084); /* Semi-transparent background */
+    background: rgba(192, 191, 191, 0.276); /* Semi-transparent background */
     backdrop-filter: blur(10px); /* Background blur effect */
     z-index: 9999; /* Ensure it appears above other elements */
 }

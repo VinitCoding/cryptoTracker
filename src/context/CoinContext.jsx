@@ -13,9 +13,18 @@ const CoinContextProvider = (props) => {
         symbol: "₹"
     })
     const API_KEY = import.meta.env.VITE_COINGECKO_API_KEY
+
+    useEffect(() => {
+        const debounceFetch = setTimeout(() => {
+            fetchAllCoin();
+        }, 500); // 500ms debounce
+
+        return () => clearTimeout(debounceFetch);
+    }, [currency])
+
     const fetchAllCoin = async () => {
+        setLoading(true);
         try {
-            setLoading(true);
             const response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets`, {
                 params: { vs_currency: currency.name },
                 headers: {
@@ -23,11 +32,11 @@ const CoinContextProvider = (props) => {
                     'x-cg-demo-api-key': API_KEY
                 }})
             if (response) {
+                setAllCoin(response.data)
                 setTimeout(() => {
                     setLoading(false);
                 }, 1000)
                 // console.log('data fetch successfully', response.data);
-                setAllCoin(response.data)
             }
         } catch (error) {
             setTimeout(() => {
@@ -42,9 +51,7 @@ const CoinContextProvider = (props) => {
         }
     }
 
-    useEffect(() => {
-        fetchAllCoin()
-    }, [currency])
+
 
     const contextValue = {
         allCoin,
@@ -53,7 +60,8 @@ const CoinContextProvider = (props) => {
     }
     return (
         <CoinContext.Provider value={contextValue}>
-            {loading ? <Loader /> : props.children}
+            {props.children}
+            {loading && <Loader />}
         </CoinContext.Provider>
     )
 }

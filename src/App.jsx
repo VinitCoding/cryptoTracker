@@ -19,7 +19,7 @@ const App = () => {
       <ThemeProvider>
         <PrimeReactProvider>
           {/* Navbar */}
-          <Toaster />
+          <Toaster position='center'/>
           <Navbar />
           <Routes>
             <Route path='/' element={<LandingPage />} />

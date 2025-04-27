@@ -53,9 +53,9 @@ const Hero = () => {
       </div>
 
       <div>
-        <img data-aos="fade-up" src={img_1} alt="" className='absolute top-[50%] left-[8%] 2xl:block xl:block md:block sm:hidden hidden '/>
-        <img data-aos="fade-up" src={img_2} alt="" className='absolute top-[9%] left-[60%] 2xl:block xl:block md:block sm:hidden hidden '/>
-        <img data-aos="fade-up" src={img_3} alt="" className='absolute top-[60%] left-[90%] 2xl:block xl:block md:block sm:hidden hidden '/>
+        <img data-aos="fade-up" src={img_1} alt="" className='absolute top-[50%] left-[8%] 2xl:block xl:block md:hidden sm:hidden hidden '/>
+        <img data-aos="fade-up" src={img_2} alt="" className='absolute top-[9%] left-[60%] 2xl:block xl:block md:hidden sm:hidden hidden '/>
+        <img data-aos="fade-up" src={img_3} alt="" className='absolute top-[60%] left-[90%] 2xl:block xl:block md:hidden sm:hidden hidden '/>
       </div>
       </div>
   )
