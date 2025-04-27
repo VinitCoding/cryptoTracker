@@ -26,6 +26,9 @@ const HomePage = () => {
   const searchInput = (e) => {
     const inp_val = e.target.value
     setInputValue(inp_val);
+    if(inp_val === ""){
+      setDisplayCoin(allCoin)
+    }
   }
 
   const handleSearch = async (e) => {
@@ -88,8 +91,13 @@ const HomePage = () => {
       {/* Input field */}
       <div className='overflow-x-hidden flex justify-center gap-x-16 items-center mt-4'>
         <form className='flex justify-center items-center gap-x-2 bg-white rounded shadow px-4 py-2 w-96' onSubmit={handleSearch}>
-          <input type="text" className='focus:outline-0 text-zinc-600 w-full' placeholder='Enter a coin name...' onChange={searchInput} value={inputValue} />
-          <IoSearch type='submit' />
+          <input type="text" list={inputValue ? 'coinList' : undefined} className='focus:outline-0 text-zinc-600 w-full' placeholder='Enter a coin name...' onChange={searchInput} value={inputValue} />
+          <datalist id='coinList'>
+            {allCoin.map((coin, index) => (
+              <option key={index} value={coin.name} />
+            ))}
+          </datalist>
+          <button type='submit' className='cursor-pointer'><IoSearch /></button>
         </form>
 
         <div className='flex gap-x-2'>
