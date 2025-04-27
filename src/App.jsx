@@ -9,6 +9,7 @@ import LandingPage from './pages/LandingPage';
 import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import CoinDetailsPage from './pages/CoinDetailsPage';
+import { Toaster } from 'react-stacked-toast';
 
         
 
@@ -18,6 +19,7 @@ const App = () => {
       <ThemeProvider>
         <PrimeReactProvider>
           {/* Navbar */}
+          <Toaster />
           <Navbar />
           <Routes>
             <Route path='/' element={<LandingPage />} />
