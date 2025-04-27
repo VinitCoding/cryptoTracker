@@ -12,7 +12,7 @@ const CoinContextProvider = (props) => {
         name: "inr",
         symbol: "₹"
     })
-    const API_KEY = import.meta.env.VITE_COINGECKO_API_KEY
+    const API_KEY = import.meta.env.VITE_COINGECKO_API
 
     useEffect(() => {
         const debounceFetch = setTimeout(() => {

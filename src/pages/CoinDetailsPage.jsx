@@ -14,7 +14,7 @@ const CoinDetailsPage = () => {
   const [historicalData, setHistoricalData] = useState();
   const [days, setDays] = useState(5)
   const [loading, setLoading] = useState(true)
-  const API_KEY = import.meta.env.VITE_COINGECKO_API_KEY
+  const API_KEY = import.meta.env.VITE_COINGECKO_API
 
   const currencyHandler = (e) => {
     // setLoading(true)
