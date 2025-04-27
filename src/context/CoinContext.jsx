@@ -23,7 +23,6 @@ const CoinContextProvider = (props) => {
     }, [currency])
 
     const fetchAllCoin = async () => {
-        setLoading(true);
         try {
             const response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets`, {
                 params: { vs_currency: currency.name },
@@ -33,21 +32,12 @@ const CoinContextProvider = (props) => {
                 }})
             if (response) {
                 setAllCoin(response.data)
-                setTimeout(() => {
-                    setLoading(false);
-                }, 1000)
                 // console.log('data fetch successfully', response.data);
             }
         } catch (error) {
-            setTimeout(() => {
-                setLoading(false);
-            }, 1000)
             toast.error('Error while fetching data')
             console.error(error);
         }finally {
-            setTimeout(() => {
-                setLoading(false);
-            }, 1000)
         }
     }
 
@@ -61,7 +51,7 @@ const CoinContextProvider = (props) => {
     return (
         <CoinContext.Provider value={contextValue}>
             {props.children}
-            {loading && <Loader />}
+            {/* {loading && <Loader />} */}
         </CoinContext.Provider>
     )
 }

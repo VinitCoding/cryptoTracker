@@ -4,6 +4,7 @@ import { CoinContext } from '../context/CoinContext';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS styles
 import toast from 'react-stacked-toast';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const { setCurrency } = useContext(CoinContext);
@@ -11,9 +12,9 @@ const HomePage = () => {
   const [displayCoin, setDisplayCoin] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [noData, setNoData] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
-
     setDisplayCoin(allCoin);
   }, [allCoin])
   useEffect(() => {
@@ -21,30 +22,41 @@ const HomePage = () => {
       duration: 1000, // animation duration in ms
       once: true,     // whether animation should happen only once
     });
+    const savedCurrency = sessionStorage.getItem('currency');
+    if (savedCurrency) {
+      setCurrency(JSON.parse(savedCurrency)); // Retrieve from sessionStorage
+    }else {
+      // Fallback to default currency if not found
+      setCurrency({ name: 'inr', symbol: '₹' });
+    }
   }, []);
 
   const searchInput = (e) => {
     const inp_val = e.target.value
     setInputValue(inp_val);
-    if(inp_val === ""){
+    if (inp_val === "") {
       setDisplayCoin(allCoin)
     }
   }
 
+  const openDetailCoinPage = (id) => {
+    navigate(`/coin/${id}`)
+  }
+
   const handleSearch = async (e) => {
     e.preventDefault();
-    if(inputValue.trim() === ''){
+    if (inputValue.trim() === '') {
       toast.error({
         title: 'Error',
         description: 'Please enter a coin name',
       })
-    }else{
+    } else {
       const coins = await allCoin.filter((item) => {
         return item.name.toLowerCase().includes(inputValue.toLocaleLowerCase())
       })
-      if(coins.length === 0){
+      if (coins.length === 0) {
         setNoData(true);
-      }else{
+      } else {
         setNoData(false);
         setDisplayCoin(coins)
       }
@@ -53,32 +65,40 @@ const HomePage = () => {
 
   const currencyHandler = (e) => {
     setInputValue('')
-    switch (e.target.value) {
-      case 'inr':
-        setCurrency({
-          name: 'inr',
-          symbol: '₹'
-        })
-        break;
-      case 'eur':
-        setCurrency({
-          name: 'eur',
-          symbol: '€'
-        })
-        break;
-      case 'usd':
-        setCurrency({
-          name: 'usd',
-          symbol: '$'
-        })
-        break;
-      default:
-        setCurrency({
-          name: 'inr',
-          symbol: '₹'
-        })
-        break;
-    }
+    // switch (e.target.value) {
+    //   case 'inr':
+    //     setCurrency({
+    //       name: 'inr',
+    //       symbol: '₹'
+    //     })
+    //     break;
+    //   case 'eur':
+    //     setCurrency({
+    //       name: 'eur',
+    //       symbol: '€'
+    //     })
+    //     break;
+    //   case 'usd':
+    //     setCurrency({
+    //       name: 'usd',
+    //       symbol: '$'
+    //     })
+    //     break;
+    //   default:
+    //     setCurrency({
+    //       name: 'inr',
+    //       symbol: '₹'
+    //     })
+    //     break;
+    // }
+    const selectedCurrency = e.target.value;
+    const currencyData = {
+      name: selectedCurrency,
+      symbol: selectedCurrency === 'inr' ? '₹' : selectedCurrency === 'eur' ? '€' : '$',
+    };
+
+    setCurrency(currencyData);
+    sessionStorage.setItem('currency', JSON.stringify(currencyData)); // Save to sessionStorage
   }
 
   return (
@@ -102,7 +122,7 @@ const HomePage = () => {
 
         <div className='flex gap-x-2'>
           {/* <label htmlFor="" className='dark:text-zinc-200'>Select Currency</label> */}
-          <select onChange={currencyHandler} className='bg-white px-2 py-2 rounded shadow selection:outline-0 focus:outline-0 cursor-pointer'>
+          <select onChange={currencyHandler} value={currency.name} className='bg-white px-2 py-2 rounded shadow selection:outline-0 focus:outline-0 cursor-pointer'>
             {/* <option selected disabled>Select Currency</option> */}
             <option value="inr" selected>INR</option>
             <option value="usd">USD</option>
@@ -115,8 +135,8 @@ const HomePage = () => {
       {
         displayCoin.length > 0 && !noData && (
           <div className='mt-14 h-full'>
-            <div className='2xl:flex xl:flex md:flex sm:block block justify-center overflow-auto max-h-[400px] w-full'>
-              <table className='border-collapse table-auto w-fit'>
+            <div className='2xl:flex xl:flex md:flex sm:block block justify-center overflow-auto max-h-[400px] w-full '>
+              <table className='border-collapse table-auto w-fit min-w-[80%]'>
                 <thead className='sticky top-0'>
                   <tr>
                     <th className='border border-gray-400 dark:border-zinc-500 text-zinc-700 p-2 px-4 bg-gray-100 dark:bg-[#192d49de] dark:text-zinc-200'>#</th>
@@ -129,7 +149,7 @@ const HomePage = () => {
                 <tbody>
                   {
                     displayCoin.map((coin, index) => (
-                      <tr key={index}>
+                      <tr key={index} onClick={() => openDetailCoinPage(coin.id)} className='cursor-pointer' title='Click to know more'>
                         <td className='px-4 p-2 text-start bg-white dark:bg-[#1f2a3bde] dark:text-zinc-200 border-[0.3px] border-zinc-300 dark:border-zinc-600'>{coin.market_cap_rank}</td>
                         <td className='px-4 p-2 text-start bg-white dark:bg-[#1f2a3bde] dark:text-zinc-200 border-[0.3px] border-zinc-300 dark:border-zinc-600 flex justify-start items-center gap-x-5 overflow-x-hidden'>
                           <img src={coin.image} alt="" className='w-11' />
